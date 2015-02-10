@@ -2,17 +2,23 @@ package entities;
 
 // Generated Jan 28, 2015 12:24:24 PM by Hibernate Tools 4.3.1
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,21 +27,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "role")
+@NamedQuery(name="Role.findAll",query="select r from Role r")
 public class Role implements java.io.Serializable {
 
 	private Integer id;
 	private String code;
 	private String name;
 	private String description;
-	private Set<Alarm> alarms = new HashSet<Alarm>(0);
-	private Set<User> users = new HashSet<User>(0);
-	private Set<Priviliges> priviligeses = new HashSet<Priviliges>(0);
+	private List<Alarm> alarms = new ArrayList<Alarm>();
+	private List<User> users = new ArrayList<User>();
+	private List<Priviliges> priviligeses = new ArrayList<Priviliges>();
 
 	public Role() {
 	}
 
 	public Role(String code, String name, String description,
-			Set<Alarm> alarms, Set<User> users, Set<Priviliges> priviligeses) {
+			List<Alarm> alarms, List<User> users, List<Priviliges> priviligeses) {
 		this.code = code;
 		this.name = name;
 		this.description = description;
@@ -84,30 +91,30 @@ public class Role implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "role_alarms", joinColumns = { @JoinColumn(name = "role_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "alarm_id", nullable = false, updatable = false) })
-	public Set<Alarm> getAlarms() {
+	public List<Alarm> getAlarms() {
 		return this.alarms;
 	}
 
-	public void setAlarms(Set<Alarm> alarms) {
+	public void setAlarms(List<Alarm> alarms) {
 		this.alarms = alarms;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "role")
-	public Set<User> getUsers() {
+	public List<User> getUsers() {
 		return this.users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "role_priviliges", joinColumns = { @JoinColumn(name = "role_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "priviliges_id", nullable = false, updatable = false) })
-	public Set<Priviliges> getPriviligeses() {
+	public List<Priviliges> getPriviligeses() {
 		return this.priviligeses;
 	}
 
-	public void setPriviligeses(Set<Priviliges> priviligeses) {
+	public void setPriviligeses(List<Priviliges> priviligeses) {
 		this.priviligeses = priviligeses;
 	}
 

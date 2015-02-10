@@ -2,17 +2,23 @@ package entities;
 
 // Generated Jan 28, 2015 12:24:24 PM by Hibernate Tools 4.3.1
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -20,12 +26,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "priviliges")
+@NamedQuery(name="Privilage.findAll",query="select p from Role p")
 public class Priviliges implements java.io.Serializable {
 
 	private Integer id;
 	private String code;
 	private String function;
-	private Set<Role> roles = new HashSet<Role>(0);
+	private List<Role> roles = new ArrayList<Role>();
 
 	public Priviliges() {
 	}
@@ -67,11 +74,11 @@ public class Priviliges implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "role_priviliges", joinColumns = { @JoinColumn(name = "priviliges_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "role_id", nullable = false, updatable = false) })
-	public Set<Role> getRoles() {
+	public List<Role> getRoles() {
 		return this.roles;
 	}
 
-	public void setRoles(Set<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
