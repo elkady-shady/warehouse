@@ -11,10 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -23,8 +22,9 @@ import org.hibernate.annotations.NaturalId;
  */
 @Entity
 @Table(name = "user")
-@NamedQueries({@NamedQuery(name="User.findAll",query="select u from User u"),
-@NamedQuery(name="User.login",query="select COUNT(u.id) c from User u where u.userName=:username AND u.password=:password")})
+@NamedQueries({
+		@NamedQuery(name = "User.findAll", query = "select u from User u"),
+		@NamedQuery(name = "User.login", query = "select COUNT(u.id) c from User u where u.userName=:username AND u.password=:password") })
 public class User implements java.io.Serializable {
 
 	private Integer id;
