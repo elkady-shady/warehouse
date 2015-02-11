@@ -2,15 +2,12 @@ package entities;
 
 // Generated Jan 28, 2015 12:24:24 PM by Hibernate Tools 4.3.1
 
-import java.util.HashSet;
-import java.util.Set;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,20 +23,16 @@ public class Product implements java.io.Serializable {
 	private Float weight;
 	private String description;
 	private Float unitPrice;
-	private String unitOfMeasure;
-	private String active;
+	private UnitOfMeasureEnum unitOfMeasure;
+	private boolean active;
 	private Float threshold;
-	private Set<ProductAdvice> productAdvices = new HashSet<ProductAdvice>(0);
-	private Set<Inventory> inventories = new HashSet<Inventory>(0);
-	private Set<ProductLine> productLines = new HashSet<ProductLine>(0);
 
 	public Product() {
 	}
 
 	public Product(String name, String code, Float weight, String description,
-			Float unitPrice, String unitOfMeasure, String active,
-			Float threshold, Set<ProductAdvice> productAdvices,
-			Set<Inventory> inventories, Set<ProductLine> productLines) {
+			Float unitPrice, UnitOfMeasureEnum unitOfMeasure, boolean active,
+			Float threshold) {
 		this.name = name;
 		this.code = code;
 		this.weight = weight;
@@ -48,9 +41,7 @@ public class Product implements java.io.Serializable {
 		this.unitOfMeasure = unitOfMeasure;
 		this.active = active;
 		this.threshold = threshold;
-		this.productAdvices = productAdvices;
-		this.inventories = inventories;
-		this.productLines = productLines;
+
 	}
 
 	@Id
@@ -110,20 +101,20 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "unit_of_measure", length = 45)
-	public String getUnitOfMeasure() {
+	public UnitOfMeasureEnum getUnitOfMeasure() {
 		return this.unitOfMeasure;
 	}
 
-	public void setUnitOfMeasure(String unitOfMeasure) {
+	public void setUnitOfMeasure(UnitOfMeasureEnum unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
 	}
 
 	@Column(name = "active", length = 45)
-	public String getActive() {
+	public boolean getActive() {
 		return this.active;
 	}
 
-	public void setActive(String active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 
@@ -134,33 +125,6 @@ public class Product implements java.io.Serializable {
 
 	public void setThreshold(Float threshold) {
 		this.threshold = threshold;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<ProductAdvice> getProductAdvices() {
-		return this.productAdvices;
-	}
-
-	public void setProductAdvices(Set<ProductAdvice> productAdvices) {
-		this.productAdvices = productAdvices;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<Inventory> getInventories() {
-		return this.inventories;
-	}
-
-	public void setInventories(Set<Inventory> inventories) {
-		this.inventories = inventories;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	public Set<ProductLine> getProductLines() {
-		return this.productLines;
-	}
-
-	public void setProductLines(Set<ProductLine> productLines) {
-		this.productLines = productLines;
 	}
 
 }

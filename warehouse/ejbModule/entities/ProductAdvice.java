@@ -3,6 +3,7 @@ package entities;
 // Generated Jan 28, 2015 12:24:24 PM by Hibernate Tools 4.3.1
 
 import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
